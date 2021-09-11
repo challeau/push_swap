@@ -1,0 +1,36 @@
+#ifndef PUSH_SWAP_H
+#define PUSH_SWAP_H
+#include <stdlib.h>
+#include <stdbool.h>
+#include <sys/types.h>
+
+#include <stdio.h>
+#include <assert.h>
+
+typedef struct	s_node{
+	int			data;
+	struct s_node	*next;
+}		t_node;
+
+enum		e_ins_info {
+	e_INS_A,
+	e_INS_B,
+	e_INS_AB,
+};
+
+/* NODES */
+bool	add_node_after(t_node **prev_node, int data);
+bool	add_node_back(t_node **head, int data);
+bool	add_node_front(t_node **head, int data);
+
+/* STACKS */
+void	ft_memdel_stack(t_node *head);
+
+/* INSTRUCTIONS */
+void	swap(t_node *a, t_node *b, enum e_ins_info ins_info);
+void	push(t_node **a, t_node **b, enum e_ins_info ins_info);
+
+/* UTILS */
+void print_stack(t_node *node);
+
+#endif
