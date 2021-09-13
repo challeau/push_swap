@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/types.h>
+#include "libft/libft.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -22,13 +23,16 @@ enum		e_ins_info {
 bool	add_node_after(t_node **prev_node, int data);
 bool	add_node_back(t_node **head, int data);
 bool	add_node_front(t_node **head, int data);
+int	pop(t_node **head);
 
 /* STACKS */
 void	ft_memdel_stack(t_node *head);
 
 /* INSTRUCTIONS */
-void	swap(t_node *a, t_node *b, enum e_ins_info ins_info);
 void	push(t_node **a, t_node **b, enum e_ins_info ins_info);
+void	rev_rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
+void	rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
+void	swap(t_node **a, t_node **b, enum e_ins_info ins_info);
 
 /* UTILS */
 void print_stack(t_node *node);

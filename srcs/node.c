@@ -49,3 +49,19 @@ bool	add_node_front(t_node **head, int data)
 	(*head) = new_node;
 	return (true);
 }
+
+int	pop(t_node **head)
+{
+	int	res;
+	t_node	*ptr;
+
+	if (*head == NULL)
+		return (0);
+	{
+		ptr = (*head);
+		res = ptr->data;
+		(*head) = ptr->next;
+		free(ptr);
+	}
+	return (res);
+}
