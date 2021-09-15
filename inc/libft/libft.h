@@ -19,25 +19,20 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-/*
-** MEMORY
-*/
+/* MEMORY */
 char	*ft_calloc(size_t size);
 void	ft_memdel(char *ptr);
 void	ft_memdel_strptr(char **array);
 char	*ft_realloc(char *str, size_t new_size);
 char	*ft_strdup(const char *src);
+char	**ft_strptrdup(char **src);
 
-/*
-** STRING <=> NUM
-*/
+ /* STRING <=> NUM */
 float	ft_atof(const char*str);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int num);
 
-/*
-** CHAR OR STRING TYPE
-*/
+/* CHAR OR STRING TYPE */
 bool	ft_char_isalnum(int c);
 bool	ft_char_isalpha(int c);
 bool	ft_char_isascii(int c);
@@ -45,9 +40,7 @@ bool	ft_char_isdigit(int c);
 bool	ft_str_isnum(const char *str);
 bool	ft_str_isprint(const char *str);
 
-/*
-** STR MANIPULATION
-*/
+/* STR MANIPULATION */
 char	*ft_add_char(char *src, char to_add);
 void	ft_bzero(char *str);
 uint8_t	ft_char_rep_count(char c, const char *str);
@@ -61,21 +54,15 @@ size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
 void	ft_strrev(char *str);
 
-/*
-** PRINTING
-*/
+/* PRINTING */
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
 
-/*
-** INT STUFF
-*/
+/* INT STUFF */
 int		ft_intlen(long n);
 
-/*
-** OTHERS
-*/
+/* OTHERS */
 int		get_next_line(int fd, char **line);
 
 #endif

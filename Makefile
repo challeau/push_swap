@@ -14,7 +14,7 @@ LDLIBS		=	-lft
 INC		=	./inc/libft
 
 all:
-	@make -C $(INC)
+	@make -C $(INC) all
 	@$(MAKE) $(EXE)
 
 $(EXE): $(OBJS)
@@ -30,15 +30,18 @@ $(OBJS_DIR):
 clean:
 	@make -C $(INC) clean
 	@rm -rf $(OBJS) $(OBJS_DIR)
+	@echo "\033[1mAll clean.\033[m"
 
 fclean:
 	@make -C $(INC) fclean
 	@rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
+	@echo "\033[1mAll clean.\033[m"
 
 git-ready:
 	@make -C $(INC) git-ready
 	@rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
 	@rm -f $(wildcard *~) $(wildcard */*~)
+	@echo "\033[1mReady to push.\033[m"
 
 re: fclean all
 

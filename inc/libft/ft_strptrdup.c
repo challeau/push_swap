@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_isnum.c                                     :+:      :+:    :+:   */
+/*   ft_strptrdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: challeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,23 @@
 
 #include "libft.h"
 
-bool	ft_str_isnum(const char *str)
+char	**ft_strptrdup(char **src)
 {
-	if (*str == '-')
-		str++;
-	while (*str)
+	size_t	len;
+	char	**new;
+
+	len = 0;
+	while (src[len])
+		len++;
+	new = (char **)malloc((len + 1) * sizeof(char *));
+	if (new == NULL)
+		return (NULL);
+	len = 0;
+	while (src[len])
 	{
-		if (ft_char_isdigit(*str) == false && *str)
-			return (false);
-		str++;
+		new[len] = ft_strdup(src[len]);
+		len++;
 	}
-	return (true);
+	new[len] = NULL;
+	return (new);
 }

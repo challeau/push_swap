@@ -34,7 +34,11 @@ void	rev_rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
 void	rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
 void	swap(t_node **a, t_node **b, enum e_ins_info ins_info);
 
+/* PARSER */
+t_node	*get_stack(char **args);
+
 /* UTILS */
 void print_stack(t_node *node);
+void	error(t_node *head, char **args);
 
 #endif
