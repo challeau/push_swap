@@ -22,7 +22,7 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 {
 	if (ft_str_isnum(arg) == false)
 		return (false);
-	if (ft_strlen(arg) >= 11)
+	if (ft_strlen(arg) >= 9)
 	{
 		if (*arg == '-' && ft_strcmp("-2147483648", arg) < 0)
 			return (false);
@@ -36,6 +36,22 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 	return  (true);
 }
 
+static uint8_t	stack_len(t_node *head)
+{
+	uint8_t	len;
+	t_node	*ptr;
+
+	len = 0;
+	ptr = head;
+	while(ptr->next != NULL)
+	{
+		len++;
+		ptr = ptr->next;
+	}
+	len++;
+	return (len);
+}
+
 t_node	*get_stack(char **args)
 {
 	uint8_t		i;
@@ -46,18 +62,20 @@ t_node	*get_stack(char **args)
 	tmp_data = NULL;
 	while (args[i] != NULL)
 	{
-		if (ft_char_rep_count(' ', args[i]) > 0)
+		if (i == 0 && ft_char_rep_count(' ', args[i]) > 0)
 		{
 			tmp_data = ft_split(args[i], ' ');
 			get_stack(tmp_data);
-			i++;
+			ft_memdel_strptr(tmp_data);
+			return (new_stack);
 		}
-		if (args[i] == NULL)
-			break ;
+		else if (i != 0 && ft_char_rep_count(' ', args[i]) > 0)
+			error(new_stack, NULL);
 		if (check_and_add_arg(&new_stack, args[i]) == false)
-			error (new_stack, args);
+			error(new_stack, NULL);
 		i++;
 	}
-	ft_memdel_strptr(args);
+	if (stack_len(new_stack) < 2)
+		error(new_stack, NULL);
 	return (new_stack);
 }

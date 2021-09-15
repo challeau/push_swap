@@ -7,9 +7,9 @@ int	main(int ac, char **av)
 	t_node *a;
 	t_node *b;
 
-	if (ac < 2)
+	if (ac < 2 || *av[1] == '\0')
 		error(NULL, NULL);
-	a = get_stack(ft_strptrdup(av + 1));
+	a = get_stack(av + 1);
 	b = NULL;
 	/* print_stack(a); */
 	/* print_stack(b); */
