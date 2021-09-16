@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: challeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 15:08:54 by challeau          #+#    #+#             */
+/*   Updated: 2021/09/16 15:08:54 by challeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
+/*
+** Performs a rotation on the stack.
+*/
 static void	rotate_stack(t_node **head)
 {
 	int		head_data;
@@ -17,7 +32,11 @@ static void	rotate_stack(t_node **head)
 	ptr->data = head_data;
 }
 
-void		rotate(t_node **a, t_node **b, enum e_ins_info ins_info)
+/*
+** Moves up the nodes of stack a, b, or both (depending on ins_info) by 1.
+** Outputs the operation.
+*/
+void	rotate(t_node **a, t_node **b, enum e_ins_info ins_info)
 {
 	static char	*instructions[3] = {"ra\n", "rb\n", "rr\n"};
 

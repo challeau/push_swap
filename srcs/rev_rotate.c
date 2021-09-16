@@ -1,10 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: challeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 15:08:17 by challeau          #+#    #+#             */
+/*   Updated: 2021/09/16 15:08:17 by challeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
+/*
+** Performs a reverse rotation on the stack.
+*/
 static void	rev_rotate_stack(t_node **head)
 {
 	t_node	*ptr;
-	t_node	*new_node = NULL;
+	t_node	*new_node;
 
+	new_node = NULL;
 	if (!head || (*head)->next == NULL)
 		return ;
 	ptr = (*head);
@@ -14,7 +30,11 @@ static void	rev_rotate_stack(t_node **head)
 	(*head) = new_node;
 }
 
-void		rev_rotate(t_node **a, t_node **b, enum e_ins_info ins_info)
+/*
+** Moves down the nodes of stack a, b, or both (depending on ins_info) by 1.
+** Outputs the operation.
+*/
+void	rev_rotate(t_node **a, t_node **b, enum e_ins_info ins_info)
 {
 	static char	*instructions[3] = {"rra\n", "rrb\n", "rrr\n"};
 

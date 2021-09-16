@@ -1,8 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   node.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: challeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 11:49:39 by challeau          #+#    #+#             */
+/*   Updated: 2021/09/16 11:49:39 by challeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
+/*
+** Creates a new node containing data and inserts it after the node prev_node.
+** Returns true upon success.
+*/
 bool	add_node_after(t_node **prev_node, int data)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	if (*prev_node == NULL)
 		return (false);
@@ -15,10 +31,14 @@ bool	add_node_after(t_node **prev_node, int data)
 	return (true);
 }
 
+/*
+** Creates a new node containing the data and inserts it at the end of the stack.
+** Returns true upon success.
+*/
 bool	add_node_back(t_node **head, int data)
 {
-	t_node *new_node;
-	t_node *ptr;
+	t_node	*new_node;
+	t_node	*ptr;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
@@ -37,9 +57,13 @@ bool	add_node_back(t_node **head, int data)
 	return (true);
 }
 
+/*
+** Creates a new node containing the data and inserts it at the begining of
+** the stack. Returns true upon success.
+*/
 bool	add_node_front(t_node **head, int data)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
@@ -50,9 +74,12 @@ bool	add_node_front(t_node **head, int data)
 	return (true);
 }
 
+/*
+** Frees a node and return its data.
+*/
 int	pop(t_node **head)
 {
-	int	res;
+	int		res;
 	t_node	*ptr;
 
 	if (*head == NULL)

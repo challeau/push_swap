@@ -1,8 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: challeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 15:07:09 by challeau          #+#    #+#             */
+/*   Updated: 2021/09/16 15:07:09 by challeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
+/*
+** Pushes a node from stack src to stack dest.
+*/
 static void	push_node(t_node **src, t_node **dest)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (*src);
 	if (*src == NULL)
@@ -12,7 +27,11 @@ static void	push_node(t_node **src, t_node **dest)
 	(*dest) = new_node;
 }
 
-void		push(t_node **a, t_node **b, enum e_ins_info ins_info)
+/*
+** Pushes a node from stack a to stack b or from stack b to stack a
+** (depending on ins_info). Outputs the operation.
+*/
+void	push(t_node **a, t_node **b, enum e_ins_info ins_info)
 {
 	static char	*instructions[3] = {"pa\n", "pb\n", ""};
 
