@@ -28,6 +28,7 @@ int	pop(t_node **head);
 
 /* STACKS */
 void	ft_memdel_stack(t_node *head);
+int	peek(t_node *head);
 void	print_stack(t_node *node);
 bool	stack_is_sorted(t_node *head);
 int	stack_len(t_node *head);
@@ -43,5 +44,6 @@ t_node	*get_stack(char **args);
 
 /* UTILS */
 void	error(t_node *head);
+int	find_num_spot(t_node *head, int num);
 
 #endif

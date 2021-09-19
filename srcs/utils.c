@@ -22,3 +22,18 @@ void	error(t_node *head)
 	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }
+
+int	find_num_spot(t_node *head, int num)
+{
+	int	i = 0;
+	t_node	*ptr = head;
+
+	while (ptr != NULL)
+	{
+		if (num < ptr->data)
+			return(i);
+		i++;
+		ptr = ptr->next;
+	}
+	return (i);
+}

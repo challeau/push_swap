@@ -28,6 +28,13 @@ void	ft_memdel_stack(t_node *head)
 	}
 }
 
+int	peek(t_node *head)
+{
+	if (head == NULL)
+		return (INT_MIN);
+	return (head->data);
+}
+
 /*
 ** Outputs the content of the stack to stdout.
 */

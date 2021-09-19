@@ -84,11 +84,9 @@ int	pop(t_node **head)
 
 	if (*head == NULL)
 		return (0);
-	{
-		ptr = (*head);
-		res = ptr->data;
-		(*head) = ptr->next;
-		free(ptr);
-	}
+	ptr = (*head);
+	res = ptr->data;
+	(*head) = ptr->next;
+	free(ptr);
 	return (res);
 }

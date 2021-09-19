@@ -12,42 +12,33 @@
 
 #include "../inc/push_swap.h"
 
-static void	sort_three(t_node **a, t_node **b)
+/*
+** Sorts stack of size 2 or 3.
+*/
+static void	smol_sort(t_node **a, t_node **b, int stack_size)
 {
-	int first;
-	int second;
-	int last;
+	int	first;
+	int	second;
+	int	last;
 
 	first = (*a)->data;
 	second = (*a)->next->data;
-	last = (*a)->next->next->data;
-	if ((first < last) || (first > second && second > last))
-	{
-		swap(a, b, e_INS_A);
-		first = (*a)->data;
-		second = (*a)->next->data;
-	}
-	if (first > second)
-	{
-		rotate(a, b, e_INS_A);
-		first = (*a)->data;
-		second = (*a)->next->data;
-		last = (*a)->next->next->data;
-	}
-	if (second > last)
-		rev_rotate(a, b, e_INS_A);
-	
-}
-	
-static void	smol_sort(t_node **a, t_node **b, int stack_size)
-{
-	if (stack_size == 2)
-	{
-		if ((*a)->data > (*a + 1)->data)
+	if (stack_size == 2 && first > second)
 			swap(a, b, e_INS_A);
-	}
 	else if (stack_size == 3)
-		sort_three(a, b);
+	{
+		last = (*a)->next->next->data;
+		if (first < last || (first > second && second > last))
+		{
+			swap(a, b, e_INS_A);
+			first = (*a)->data;
+			second = (*a)->next->data;
+		}
+		if (first > second)
+			rotate(a, b, e_INS_A);
+		if (second > last)
+			rev_rotate(a, b, e_INS_A);
+	}
 }
 
 /* stack a has the items to sort, stack b is a work stack. */
