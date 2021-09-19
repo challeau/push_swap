@@ -43,20 +43,39 @@ void	print_stack(t_node *head)
 }
 
 /*
+** Returns true if the stack is sorted, false if it isnt.
+*/
+bool	stack_is_sorted(t_node *head)
+{
+	int	tmp;
+	t_node	*ptr;
+
+	tmp = INT_MIN;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data < tmp)
+			return (false);
+		tmp = ptr->data;
+		ptr = ptr->next;
+	}
+	return (true);
+}
+
+/*
 ** Returns the ammount of nodes in the stack.
 */
-uint8_t	stack_len(t_node *head)
+int	stack_len(t_node *head)
 {
-	uint8_t	len;
+	int	len;
 	t_node	*ptr;
 
 	len = 0;
 	ptr = head;
-	while (ptr->next != NULL)
+	while (ptr != NULL)
 	{
 		len++;
 		ptr = ptr->next;
 	}
-	len++;
 	return (len);
 }

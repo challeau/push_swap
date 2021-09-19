@@ -2,6 +2,7 @@
 #define PUSH_SWAP_H
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 #include <sys/types.h>
 #include "libft/libft.h"
 
@@ -28,7 +29,8 @@ int	pop(t_node **head);
 /* STACKS */
 void	ft_memdel_stack(t_node *head);
 void	print_stack(t_node *node);
-uint8_t	stack_len(t_node *head);
+bool	stack_is_sorted(t_node *head);
+int	stack_len(t_node *head);
 
 /* INSTRUCTIONS */
 void	push(t_node **a, t_node **b, enum e_ins_info ins_info);

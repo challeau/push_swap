@@ -12,27 +12,62 @@
 
 #include "../inc/push_swap.h"
 
+static void	sort_three(t_node **a, t_node **b)
+{
+	int first;
+	int second;
+	int last;
+
+	first = (*a)->data;
+	second = (*a)->next->data;
+	last = (*a)->next->next->data;
+	if ((first < last) || (first > second && second > last))
+	{
+		swap(a, b, e_INS_A);
+		first = (*a)->data;
+		second = (*a)->next->data;
+	}
+	if (first > second)
+	{
+		rotate(a, b, e_INS_A);
+		first = (*a)->data;
+		second = (*a)->next->data;
+		last = (*a)->next->next->data;
+	}
+	if (second > last)
+		rev_rotate(a, b, e_INS_A);
+	
+}
+	
+static void	smol_sort(t_node **a, t_node **b, int stack_size)
+{
+	if (stack_size == 2)
+	{
+		if ((*a)->data > (*a + 1)->data)
+			swap(a, b, e_INS_A);
+	}
+	else if (stack_size == 3)
+		sort_three(a, b);
+}
+
 /* stack a has the items to sort, stack b is a work stack. */
 int	main(int ac, char **av)
 {
 	t_node	*a;
 	t_node	*b;
+	int	stack_size;
 
 	if (ac < 2 || *av[1] == '\0')
 		error(NULL);
 	a = get_stack(av + 1);
 	b = NULL;
+	stack_size = stack_len(a);
+	if (stack_is_sorted(a) == false)
+	{
+		if (stack_size <= 5)
+			smol_sort(&a, &b, stack_size);
+	}
 	print_stack(a);
-	print_stack(b);
-	rev_rotate(&a, &b, e_INS_A);
-	print_stack(a);
-	print_stack(b);
-	push(&a, &b, e_INS_B);
-	push(&a, &b, e_INS_B);
-	push(&a, &b, e_INS_B);
-	rotate(&a, &b, e_INS_AB);
-	print_stack(a);
-	print_stack(b);
 	ft_memdel_stack(a);
 	ft_memdel_stack(b);
 	return (0);
