@@ -29,7 +29,7 @@ int	pop(t_node **head);
 /* STACKS */
 void	ft_memdel_stack(t_node *head);
 int	peek(t_node *head);
-void	print_stack(t_node *node);
+void	print_stacks(t_node *a, t_node *b);
 bool	stack_is_sorted(t_node *head);
 int	stack_len(t_node *head);
 

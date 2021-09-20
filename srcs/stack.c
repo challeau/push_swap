@@ -38,15 +38,23 @@ int	peek(t_node *head)
 /*
 ** Outputs the content of the stack to stdout.
 */
-void	print_stack(t_node *head)
+void	print_stacks(t_node *a, t_node *b)
 {
-	while (head != NULL)
+	ft_putstr_fd("---------------------------------\n", 1);
+	while (a != NULL)
 	{
-		ft_putnbr_fd(head->data, 1);
+		ft_putnbr_fd(a->data, 1);
 		ft_putstr_fd("  ", 1);
-		head = head->next;
+		a = a->next;
 	}
 	ft_putstr_fd("\n", 1);
+	while (b != NULL)
+	{
+		ft_putnbr_fd(b->data, 1);
+		ft_putstr_fd("  ", 1);
+		b = b->next;
+	}
+	ft_putstr_fd("\n---------------------------------\n", 1);
 }
 
 /*
