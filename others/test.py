@@ -1,8 +1,8 @@
 import subprocess
 from subprocess import Popen
+from subprocess import check_output
 
-
-perm = {
+perm_fi = {
     "2 1 3 4 5",
     "3 1 2 4 5",
     "1 3 2 4 5",
@@ -124,9 +124,36 @@ perm = {
     "5 2 3 4 1",
 }
 
+perm_fo = {
+    "1 2 3 4",
+    "2 1 3 4",
+    "3 1 2 4",
+    "1 3 2 4",
+    "2 3 1 4",
+    "3 2 1 4",
+    "3 2 4 1",
+    "2 3 4 1",
+    "4 3 2 1",
+    "3 4 2 1",
+    "2 4 3 1",
+    "4 2 3 1",
+    "4 1 3 2",
+    "1 4 3 2",
+    "3 4 1 2",
+    "4 3 1 2",
+    "1 3 4 2",
+    "3 1 4 2",
+    "2 1 4 3",
+    "1 2 4 3",
+    "4 2 1 3",
+    "2 4 1 3",
+    "1 4 2 3",
+    "4 1 2 3",
+}
+
 op_nb = []
 
-for i in perm:
+for i in perm_fo:
     proc = subprocess.Popen(["./push_swap", i],
                             stdout=subprocess.PIPE,
                             universal_newlines=True,
@@ -134,7 +161,11 @@ for i in perm:
     check = subprocess.Popen(["./checker_linux", i],
                              stdin=proc.stdout,
                              text=True)
-for i in perm:
+#    out = check_output(["./checker_linux", i])
+#    if (out != "OK"):
+#        print(i)
+
+for i in perm_fo:
     line_count = 0
     proc = subprocess.run(["./push_swap", i],
                           capture_output=True,
@@ -144,7 +175,7 @@ for i in perm:
             line_count += 1
     op_nb.append(line_count)
     if (line_count >= 12):
-        print(i)
+        print(i, line_count)
 
 avg = sum(op_nb) / len(op_nb)
 max_op = max(op_nb)
