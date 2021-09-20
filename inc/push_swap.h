@@ -20,14 +20,16 @@ enum		e_ins_info {
 	e_INS_AB,
 };
 
-int	node_index(t_node *head, int node_data);
+/* SORTING */
 void	sort_small_stack(t_node **a, t_node **b, int stack_size);
+void	sort_big_stack(t_node **a, t_node **b, int stack_size);
 
 /* NODES */
 bool	add_node_after(t_node **prev_node, int data);
 bool	add_node_back(t_node **head, int data);
 bool	add_node_front(t_node **head, int data);
 int	pop(t_node **head);
+int	node_index(t_node *head, int node_data);
 
 /* STACKS */
 void	ft_memdel_stack(t_node *head);

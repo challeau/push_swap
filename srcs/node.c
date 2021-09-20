@@ -75,6 +75,26 @@ bool	add_node_front(t_node **head, int data)
 }
 
 /*
+** Returns the index where the node containing node_data belongs.
+*/
+int	node_index(t_node *head, int node_data)
+{
+	int		i;
+	t_node	*ptr;
+
+	i = 0;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data > node_data)
+			return (i);
+		i++;
+		ptr = ptr->next;
+	}
+	return (i);
+}
+
+/*
 ** Frees a node and return its data.
 */
 int	pop(t_node **head)

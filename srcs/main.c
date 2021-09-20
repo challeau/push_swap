@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 {
 	t_node	*a;
 	t_node	*b;
-	int	stack_size;
+	int		stack_size;
 
 	if (ac < 2 || *av[1] == '\0')
 		error(NULL);
@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 	{
 		if (stack_size <= 5)
 			sort_small_stack(&a, &b, stack_size);
-//		else
-//			sort_big_stack(&a, &b, stack_size);
+		else
+			sort_big_stack(&a, &b, stack_size);
 	}
 //	print_stacks(a, NULL);
 	ft_memdel_stack(a);

@@ -3,6 +3,7 @@ from subprocess import Popen
 from subprocess import check_output
 
 perm_fi = {
+    "1 2 3 4 5",
     "2 1 3 4 5",
     "3 1 2 4 5",
     "1 3 2 4 5",
@@ -153,7 +154,7 @@ perm_fo = {
 
 op_nb = []
 
-for i in perm_fo:
+for i in perm_fi:
     proc = subprocess.Popen(["./push_swap", i],
                             stdout=subprocess.PIPE,
                             universal_newlines=True,
@@ -161,11 +162,8 @@ for i in perm_fo:
     check = subprocess.Popen(["./checker_linux", i],
                              stdin=proc.stdout,
                              text=True)
-#    out = check_output(["./checker_linux", i])
-#    if (out != "OK"):
-#        print(i)
 
-for i in perm_fo:
+for i in perm_fi:
     line_count = 0
     proc = subprocess.run(["./push_swap", i],
                           capture_output=True,
@@ -174,7 +172,7 @@ for i in perm_fo:
         if c == '\n':
             line_count += 1
     op_nb.append(line_count)
-    if (line_count >= 12):
+    if (line_count > 12):
         print(i, line_count)
 
 avg = sum(op_nb) / len(op_nb)

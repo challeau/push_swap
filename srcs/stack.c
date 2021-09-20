@@ -62,7 +62,7 @@ void	print_stacks(t_node *a, t_node *b)
 */
 bool	stack_is_sorted(t_node *head)
 {
-	int	tmp;
+	int		tmp;
 	t_node	*ptr;
 
 	tmp = INT_MIN;
@@ -82,7 +82,7 @@ bool	stack_is_sorted(t_node *head)
 */
 int	stack_len(t_node *head)
 {
-	int	len;
+	int		len;
 	t_node	*ptr;
 
 	len = 0;
