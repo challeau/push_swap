@@ -14,15 +14,9 @@ typedef struct	s_node{
 	struct s_node	*next;
 }		t_node;
 
-enum		e_ins_info {
-	e_INS_A,
-	e_INS_B,
-	e_INS_AB,
-};
-
 /* SORTING */
 void	sort_small_stack(t_node **a, t_node **b, int stack_size);
-void	sort_big_stack(t_node **a, t_node **b, int stack_size);
+void	sort_big_stack(t_node **a, t_node **b);
 
 /* NODES */
 bool	add_node_after(t_node **prev_node, int data);
@@ -39,10 +33,10 @@ bool	stack_is_sorted(t_node *head);
 int	stack_len(t_node *head);
 
 /* INSTRUCTIONS */
-void	push(t_node **a, t_node **b, enum e_ins_info ins_info);
-void	rev_rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
-void	rotate(t_node **a, t_node **b, enum e_ins_info ins_info);
-void	swap(t_node **a, t_node **b, enum e_ins_info ins_info);
+void	push(t_node **src, t_node **dest, char *str);
+void	rev_rotate(t_node **head, char *str);
+void	rotate(t_node **head, char *str);
+void	swap(t_node **head, char *str);
 
 /* PARSER */
 t_node	*get_stack(char **args);

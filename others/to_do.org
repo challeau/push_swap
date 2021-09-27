@@ -9,16 +9,18 @@
 | error management         |                                          | DONE   | Y   |
 |--------------------------+------------------------------------------+--------+-----|
 | push swap instructions:  |                                          |        | Y   |
-| -swap                    |                                          | DONE   |     |
-| -push                    |                                          | DONE   |     |
-| -rotate                  |                                          | DONE   |     |
-| -reverse rotate          |                                          | DONE   |     |
+| -swap                    |                                          | DONE   | y   |
+| -push                    |                                          | DONE   | y   |
+| -rotate                  |                                          | DONE   | y   |
+| -reverse rotate          |                                          | DONE   | y   |
 |--------------------------+------------------------------------------+--------+-----|
 | sort in ascending order: |                                          |        |     |
-| -merge sort              |                                          |        |     |
-| -quick sort              |                                          |        |     |
+| -small sort              |                                          | DONE   | y   |
+| -big sort                |                                          |        |     |
 |--------------------------+------------------------------------------+--------+-----|
 | makefile libft           | message when doing nothing -> whatever   |        | Y   |
+|--------------------------+------------------------------------------+--------+-----|
+| review parsing errors    | -> only allow 1 str                      |        |     |
 |--------------------------+------------------------------------------+--------+-----|
 |                          |                                          |        |     |
 

@@ -13,9 +13,10 @@
 #include "../inc/push_swap.h"
 
 /*
-** Performs a rotation on the stack.
+** Moves up the nodes of the stack by 1.
+** Outputs the operation.
 */
-static void	rotate_stack(t_node **head)
+void	rotate(t_node **head, char *str)
 {
 	int		head_data;
 	t_node	*ptr;
@@ -30,19 +31,5 @@ static void	rotate_stack(t_node **head)
 		ptr = ptr->next;
 	}
 	ptr->data = head_data;
-}
-
-/*
-** Moves up the nodes of stack a, b, or both (depending on ins_info) by 1.
-** Outputs the operation.
-*/
-void	rotate(t_node **a, t_node **b, enum e_ins_info ins_info)
-{
-	static char	*instructions[3] = {"ra\n", "rb\n", "rr\n"};
-
-	if (ins_info == e_INS_A || ins_info == e_INS_AB)
-		rotate_stack(a);
-	if (ins_info == e_INS_B || ins_info == e_INS_AB)
-		rotate_stack(b);
-	ft_putstr_fd(instructions[ins_info], 1);
+	ft_putstr_fd(str, 1);
 }

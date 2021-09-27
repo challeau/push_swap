@@ -14,8 +14,9 @@
 
 /*
 ** Pushes a node from stack src to stack dest.
+** Outputs the operation.
 */
-static void	push_node(t_node **src, t_node **dest)
+void	push(t_node **src, t_node **dest, char *str)
 {
 	t_node	*new_node;
 
@@ -25,19 +26,5 @@ static void	push_node(t_node **src, t_node **dest)
 	(*src) = (*src)->next;
 	new_node->next = (*dest);
 	(*dest) = new_node;
-}
-
-/*
-** Pushes a node from stack a to stack b or from stack b to stack a
-** (depending on ins_info). Outputs the operation.
-*/
-void	push(t_node **a, t_node **b, enum e_ins_info ins_info)
-{
-	static char	*instructions[3] = {"pa\n", "pb\n", ""};
-
-	if (ins_info == e_INS_A)
-		push_node(b, a);
-	if (ins_info == e_INS_B)
-		push_node(a, b);
-	ft_putstr_fd(instructions[ins_info], 1);
+	ft_putstr_fd(str, 1);
 }

@@ -29,9 +29,11 @@ int	main(int ac, char **av)
 		if (stack_size <= 5)
 			sort_small_stack(&a, &b, stack_size);
 		else
-			sort_big_stack(&a, &b, stack_size);
+			sort_big_stack(&a, &b);
 	}
-//	print_stacks(a, NULL);
+	if (stack_is_sorted(a) == false)
+		ft_putstr_fd("Error\n", 2);
+//	print_stacks(a, b);
 	ft_memdel_stack(a);
 	ft_memdel_stack(b);
 	return (0);
