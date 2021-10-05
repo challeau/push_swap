@@ -32,8 +32,7 @@ int	main(int ac, char **av)
 			sort_big_stack(&a, &b);
 	}
 	if (stack_is_sorted(a) == false)
-		ft_putstr_fd("Error\n", 2);
-//	print_stacks(a, b);
+		ft_putstr_fd("u ain't doing it right\n", 2);
 	ft_memdel_stack(a);
 	ft_memdel_stack(b);
 	return (0);

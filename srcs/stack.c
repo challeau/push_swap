@@ -78,6 +78,26 @@ bool	stack_is_sorted(t_node *head)
 }
 
 /*
+** Returns true if the stack is sorted, false if it isnt.
+*/
+bool	stack_is_revsorted(t_node *head)
+{
+	int		tmp;
+	t_node	*ptr;
+
+	tmp = INT_MIN;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data < tmp)
+			return (false);
+		tmp = ptr->data;
+		ptr = ptr->next;
+	}
+	return (true);
+}
+
+/*
 ** Returns the ammount of nodes in the stack.
 */
 int	stack_len(t_node *head)

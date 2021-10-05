@@ -13,7 +13,24 @@
 #include "../inc/push_swap.h"
 
 /*
-** Parses the stack and check that arg is not already stored.
+** Indexes all the nodes from 0 to max_index (the number of nodes).
+*/
+/* static void	index_stack(t_node **head) */
+/* { */
+/* 	uint8_t	index; */
+/* 	t_node	*ptr; */
+
+/* 	index = 0; */
+/* 	ptr = (*head); */
+/* 	while (ptr != NULL) */
+/* 	{ */
+/* 		(*head)->index */
+/* 	} */
+/* } */
+
+
+/*
+** Parses the stack and checks that arg is not already stored.
 ** Returns true if it finds a duplicate.
 */
 static bool	check_for_duplicates(t_node *head, int arg)
