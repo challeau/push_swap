@@ -16,11 +16,12 @@
 |--------------------------+------------------------------------------+--------+-----|
 | sort in ascending order: |                                          |        |     |
 | -small sort              |                                          | DONE   | y   |
-| -big sort                |                                          |        |     |
+| -big sort                |                                          | MVP    | y   |
 |--------------------------+------------------------------------------+--------+-----|
 | makefile libft           | message when doing nothing -> whatever   |        | Y   |
 |--------------------------+------------------------------------------+--------+-----|
-| review parsing errors    | -> only allow 1 str                      |        |     |
+| review parsing errors    | -> only allow 1 str                      | DONE   |     |
+|                          | -> cant have more than 217 args          | DONE   |     |
 |--------------------------+------------------------------------------+--------+-----|
 |                          |                                          |        |     |
 

@@ -13,23 +13,6 @@
 #include "../inc/push_swap.h"
 
 /*
-** Indexes all the nodes from 0 to max_index (the number of nodes).
-*/
-/* static void	index_stack(t_node **head) */
-/* { */
-/* 	uint8_t	index; */
-/* 	t_node	*ptr; */
-
-/* 	index = 0; */
-/* 	ptr = (*head); */
-/* 	while (ptr != NULL) */
-/* 	{ */
-/* 		(*head)->index */
-/* 	} */
-/* } */
-
-
-/*
 ** Parses the stack and checks that arg is not already stored.
 ** Returns true if it finds a duplicate.
 */
@@ -59,15 +42,24 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 {
 	if (ft_str_isnum(arg) == false)
 		return (false);
-	if (ft_strlen(arg) >= 9)
+	if (ft_strlen(arg) > 11)
+		return (false);
+	if (ft_strlen(arg) >= 10)
 	{
-		if (*arg == '-' && ft_strcmp("-2147483648", arg) < 0)
+		if (*arg == '-' && ft_strlen(arg) == 11 &&
+		    ft_strcmp("-2147483648", arg) < 0)
+		{
+			printf("issue here: %s, %d\n", arg, ft_strcmp("-2147483648", arg));
 			return (false);
+		}
 		else if (ft_strcmp("2147483647", arg) < 0)
+		{
+			printf("issue there: %s\n", arg);
 			return (false);
+		}
 	}
 	if (check_for_duplicates(*head, ft_atoi(arg)) == true)
-		return (false);
+			return (false);
 	if (add_node_back(head, ft_atoi(arg)) == false)
 		return (false);
 	return (true);
@@ -93,7 +85,7 @@ t_node	*get_stack(char **args)
 			tmp_data = ft_split(args[i], ' ');
 			get_stack(tmp_data);
 			ft_memdel_strptr(tmp_data);
-			return (new_stack);
+			break ;
 		}
 		else if (i != 0 && ft_char_rep_count(' ', args[i]) > 0)
 			error(new_stack);
@@ -101,7 +93,5 @@ t_node	*get_stack(char **args)
 			error(new_stack);
 		i++;
 	}
-	if (stack_len(new_stack) < 2)
-		error(new_stack);
 	return (new_stack);
 }

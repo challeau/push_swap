@@ -26,7 +26,7 @@ void	error(t_node *head)
 /*
 ** Assigns the minimum and maximum values in the stack.
 */
-void	find_data_limits(t_node *head, int *min, int *max)
+void	find_data_limits(t_node *head, long *min, long *max)
 {
 	t_node	*ptr;
 

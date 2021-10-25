@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	t_node	*b;
 	int		stack_size;
 
-	if (ac < 2 || *av[1] == '\0')
+	if (ac > 1 && *av[1] == '\0')
 		error(NULL);
 	a = get_stack(av + 1);
 	b = NULL;
@@ -27,11 +27,13 @@ int	main(int ac, char **av)
 	if (stack_is_sorted(a) == false)
 	{
 		if (stack_size <= 5)
+		{
+			printf("ra\n");
 			sort_small_stack(&a, &b, stack_size);
+		}
 		else
 			sort_big_stack(&a, &b);
 	}
-//	print_stacks(a, b);
 	if (stack_is_sorted(a) == false)
 		ft_putstr_fd("u ain't doing it right\n", 2);
 	ft_memdel_stack(a);

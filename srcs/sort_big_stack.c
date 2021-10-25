@@ -82,7 +82,7 @@ void	partition(t_node **a, t_node **b, int pivot)
 
 void	sort_big_stack(t_node **a, t_node **b)
 {
-	int	min_data, max_data, med_data;
+	long	min_data, max_data, med_data;
 	int	min;
 
 	min = INT_MIN;
@@ -92,10 +92,8 @@ void	sort_big_stack(t_node **a, t_node **b)
 		med_data = (min_data + max_data) / 2;
 		partition(a, b, med_data);
 	}
-//	print_stacks(*a, *b);
 	if (stack_is_sorted(*a) == false)
 		sort_small_stack(a, b, stack_len(*a));
-//	print_stacks(*a, *b);
 	while (*b)
 	{
 		min = get_next_min(*b, min);
@@ -109,5 +107,4 @@ void	sort_big_stack(t_node **a, t_node **b)
 		push(b, a, "pa\n");
 		rotate(a, "ra\n");
 	}
-//	print_stacks(*a, *b);
 }

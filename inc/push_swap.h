@@ -46,7 +46,7 @@ t_node	*get_stack(char **args);
 
 /* UTILS */
 void	error(t_node *head);
-void	find_data_limits(t_node *head, int *min, int *max);
+void	find_data_limits(t_node *head, long *min, long *max);
 int	get_next_min(t_node *head, int prev_min);
 int	node_id(t_node *head, int node_data);
 

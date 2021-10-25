@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 perm_5 = {
     "1 2 3 4 5",
@@ -163,17 +164,19 @@ op_nb = []
 
 print(">> Testing all permutations of 3 numbers.")
 for i in perm_3:
-    proc = subprocess.Popen(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.Popen(["./push_swap", os.environ['ARG']],
                             stdout=subprocess.PIPE,
                             universal_newlines=True,
                             text=True)
-    check = subprocess.Popen(["./checker_linux", i],
+    check = subprocess.Popen(["./checker_linux", os.environ['ARG']],
                              stdin=proc.stdout,
-                             text=True)
+                             stdout=open(os.devnull, 'wb'))
 
 for i in perm_3:
     line_count = 0
-    proc = subprocess.run(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.run(["./push_swap", os.environ['ARG']],
                           capture_output=True,
                           text=True)
     for c in proc.stdout:
@@ -190,17 +193,19 @@ print(avg, max_op, min_op)
 
 print("\n>> Testing all permutations of 4 numbers.")
 for i in perm_4:
-    proc = subprocess.Popen(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.Popen(["./push_swap", os.environ['ARG']],
                             stdout=subprocess.PIPE,
                             universal_newlines=True,
                             text=True)
-    check = subprocess.Popen(["./checker_linux", i],
+    check = subprocess.Popen(["./checker_linux", os.environ['ARG']],
                              stdin=proc.stdout,
-                             text=True)
+                             stdout=open(os.devnull, 'wb'))
 
 for i in perm_4:
     line_count = 0
-    proc = subprocess.run(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.run(["./push_swap", os.environ['ARG']],
                           capture_output=True,
                           text=True)
     for c in proc.stdout:
@@ -217,17 +222,22 @@ print(avg, max_op, min_op)
 
 print("\n>> Testing all permutations of 5 numbers.")
 for i in perm_5:
-    proc = subprocess.Popen(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.Popen(["./push_swap", os.environ['ARG']],
                             stdout=subprocess.PIPE,
                             universal_newlines=True,
                             text=True)
-    check = subprocess.Popen(["./checker_linux", i],
+    check = subprocess.Popen(["./checker_linux", os.environ['ARG']],
                              stdin=proc.stdout,
-                             text=True)
+                             )
+    if check.stdout == "KO":
+        print("ERROR! checker returned KO for test ")
+        print(i)
 
 for i in perm_5:
     line_count = 0
-    proc = subprocess.run(["./push_swap", i],
+    os.environ['ARG'] = i
+    proc = subprocess.run(["./push_swap", os.environ['ARG']],
                           capture_output=True,
                           text=True)
     for c in proc.stdout:
@@ -235,9 +245,64 @@ for i in perm_5:
             line_count += 1
     op_nb.append(line_count)
     if (line_count > 12):
-        print(i, line_count)
+        print("ERROR! Too many steps to sort test " + str(i) + "  --> " + str(line_count) + " steps")
 
 avg = sum(op_nb) / len(op_nb)
 max_op = max(op_nb)
 min_op = min(op_nb)
 print(avg, max_op, min_op)
+
+
+# print("\n>> Testing all permutations of 4 numbers.")
+# for i in perm_4:
+#     proc = subprocess.Popen(["./push_swap", i],
+#                             stdout=subprocess.PIPE,
+#                             universal_newlines=True,
+#                             text=True)
+#     check = subprocess.Popen(["./checker_linux", i],
+#                              stdin=proc.stdout,
+#                              text=True)
+
+# for i in perm_4:
+#     line_count = 0
+#     proc = subprocess.run(["./push_swap", i],
+#                           capture_output=True,
+#                           text=True)
+#     for c in proc.stdout:
+#         if c == '\n':
+#             line_count += 1
+#     op_nb.append(line_count)
+#     if (line_count > 12):
+#         print(i, line_count)
+
+# avg = sum(op_nb) / len(op_nb)
+# max_op = max(op_nb)
+# min_op = min(op_nb)
+# print(avg, max_op, min_op)
+
+# print("\n>> Testing all permutations of 5 numbers.")
+# for i in perm_5:
+#     proc = subprocess.Popen(["./push_swap", i],
+#                             stdout=subprocess.PIPE,
+#                             universal_newlines=True,
+#                             text=True)
+#     check = subprocess.Popen(["./checker_linux", i],
+#                              stdin=proc.stdout,
+#                              text=True)
+
+# for i in perm_5:
+#     line_count = 0
+#     proc = subprocess.run(["./push_swap", i],
+#                           capture_output=True,
+#                           text=True)
+#     for c in proc.stdout:
+#         if c == '\n':
+#             line_count += 1
+#     op_nb.append(line_count)
+#     if (line_count > 12):
+#         print(i, line_count)
+
+# avg = sum(op_nb) / len(op_nb)
+# max_op = max(op_nb)
+# min_op = min(op_nb)
+# print(avg, max_op, min_op)
