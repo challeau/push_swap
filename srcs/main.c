@@ -28,7 +28,6 @@ int	main(int ac, char **av)
 	{
 		if (stack_size <= 5)
 		{
-			printf("ra\n");
 			sort_small_stack(&a, &b, stack_size);
 		}
 		else

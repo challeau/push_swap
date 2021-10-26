@@ -32,6 +32,8 @@
 | leaks                                                     |           |        |     |
 |-----------------------------------------------------------+-----------+--------+-----|
 | norm                                                      | new vers. |        |     |
+|                                                           | rem. main |        |     |
+|                                                           | check     |        |     |
 |-----------------------------------------------------------+-----------+--------+-----|
 | program named push_swap receives as an argument the stack |           |        |     |
 | a formatted as a list of integers                         |           |        |     |
