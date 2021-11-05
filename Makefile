@@ -14,39 +14,39 @@ LDLIBS		=	-lft
 INC		=	./inc/libft
 
 all:
-	@make -C $(INC) all
-	@$(MAKE) $(EXE)
+	make -C $(INC) all
+	$(MAKE) $(EXE)
 
 $(EXE): $(OBJS)
-	@$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
-	@echo "\033[1mCompilation \033[1;32mOK\033[m"
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	echo "\033[1mCompilation \033[1;32mOK\033[m"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@$(CC) $(CCFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CCFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	@mkdir -p $@
+	mkdir -p $@
 
 clean:
-	@make -C $(INC) clean
-	@rm -rf $(OBJS) $(OBJS_DIR)
-	@echo "\033[1mAll clean.\033[m"
+	make -C $(INC) clean
+	rm -rf $(OBJS) $(OBJS_DIR)
+	echo "\033[1mAll clean.\033[m"
 
 fclean:
-	@make -C $(INC) fclean
-	@rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
-	@echo "\033[1mAll clean.\033[m"
+	make -C $(INC) fclean
+	rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
+	echo "\033[1mAll clean.\033[m"
 
 git-ready:
-	@make -C $(INC) git-ready
-	@rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
-	@rm -f $(wildcard *~) $(wildcard */*~)
-	@echo "\033[1mReady to push.\033[m"
+	make -C $(INC) git-ready
+	rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
+	rm -f $(wildcard *~) $(wildcard */*~)
+	echo "\033[1mReady to push.\033[m"
 
 re: fclean all
 
 message:
-	@echo "Building executable..."
+	echo "Building executable..."
 
 
 .PHONY: all, re, clean, fclean, message

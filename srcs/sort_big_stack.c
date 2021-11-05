@@ -51,45 +51,30 @@ void	partition(t_node **a, t_node **b, int pivot)
 	ft_memdel(ins);
 }
 
-/* /\* */
-/* ** Sorts stack of 6+. */
-/* *\/ */
-/* void	sort_big_stack(t_node **a, t_node **b) */
-/* { */
-/* 	while (*b != NULL) */
-/* 	{ */
-/* 		find_data_limits(*a, &min_data, &max_data); */
-/* 		if ((*b)->data < max_data) */
-/* 		{ */
-/* 			int i = stack_len(*a) - get_index(*a, (*b)->data); */
-/* 			while (i > 0) */
-/* 			{ */
-/* 			     rev_rotate(a, "rra\n"); */
-/* 			     i--; */
-/* 			} */
-/* 			push(b, a, "pa\n"); */
-/* 			while (min_data < (*a)->data) */
-/* 				rotate(a, "ra\n"); */
-/* 		} */
-/* 		else */
-/* 		{ */
-/* 			push(b, a, "pa\n"); */
-/* 			rotate(a, "ra\n"); */
-/* 		} */
-/* 	} */
-/* } */
+int	avg(t_node *a)
+{
+	t_node *ptr;
+	int sum;
 
+	sum = 0;
+	ptr = a;
+	while (ptr != NULL)
+	{
+		sum += ptr->data;
+		ptr = ptr->next;
+	}
+	return (sum / stack_len(a));
+}
 
 void	sort_big_stack(t_node **a, t_node **b)
 {
-	long	min_data, max_data, med_data;
+	long	med_data;
 	int	min;
 
 	min = INT_MIN;
 	while (stack_len(*a) > 5)
 	{
-		find_data_limits(*a, &min_data, &max_data);
-		med_data = (min_data + max_data) / 2;
+		med_data = avg(*a);
 		partition(a, b, med_data);
 	}
 	if (stack_is_sorted(*a) == false)

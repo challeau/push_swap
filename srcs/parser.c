@@ -48,18 +48,12 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 	{
 		if (*arg == '-' && ft_strlen(arg) == 11 &&
 		    ft_strcmp("-2147483648", arg) < 0)
-		{
-			printf("issue here: %s, %d\n", arg, ft_strcmp("-2147483648", arg));
 			return (false);
-		}
 		else if (ft_strcmp("2147483647", arg) < 0)
-		{
-			printf("issue there: %s\n", arg);
 			return (false);
-		}
 	}
 	if (check_for_duplicates(*head, ft_atoi(arg)) == true)
-			return (false);
+		return (false);
 	if (add_node_back(head, ft_atoi(arg)) == false)
 		return (false);
 	return (true);
@@ -72,26 +66,30 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 */
 t_node	*get_stack(char **args)
 {
-	uint8_t			i;
+	uint			i;
 	char			**tmp_data;
+	char			**stack_data;
 	static t_node	*new_stack = NULL;
 
 	i = 0;
 	tmp_data = NULL;
-	while (args[i] != NULL)
+	stack_data = args;
+	if (i == 0 && ft_char_rep_count(' ', args[i]) > 0)
 	{
-		if (i == 0 && ft_char_rep_count(' ', args[i]) > 0)
+		tmp_data = ft_split(args[i], ' ');
+		stack_data = tmp_data;
+	}
+	while (stack_data[i] != NULL)
+	{
+		if (check_and_add_arg(&new_stack, stack_data[i]) == false)
 		{
-			tmp_data = ft_split(args[i], ' ');
-			get_stack(tmp_data);
-			ft_memdel_strptr(tmp_data);
-			break ;
+			if (tmp_data != NULL)
+				ft_memdel_strptr(tmp_data);
+			error(new_stack);
 		}
-		else if (i != 0 && ft_char_rep_count(' ', args[i]) > 0)
-			error(new_stack);
-		if (check_and_add_arg(&new_stack, args[i]) == false)
-			error(new_stack);
 		i++;
 	}
+	if (tmp_data != NULL)
+		ft_memdel_strptr(tmp_data);
 	return (new_stack);
 }

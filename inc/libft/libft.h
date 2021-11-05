@@ -53,6 +53,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
 void	ft_strrev(char *str);
+int	ft_strptrlen(char **src);
 
 /* PRINTING */
 void	ft_putstr_fd(char *str, int fd);

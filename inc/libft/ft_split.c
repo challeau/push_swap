@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static uint8_t	subdiv_count(const char *str, char sep)
+static uint	subdiv_count(const char *str, char sep)
 {
-	uint8_t	i;
+	uint	i;
 
 	i = 0;
 	while (*str)
@@ -35,7 +35,7 @@ char	**ft_split(const char *str, char sep)
 	size_t	i;
 	size_t	j;
 	size_t	next_sep;
-	uint8_t	word_num;
+	uint	word_num;
 	char	**new;
 
 	i = 0;
