@@ -1,4 +1,298 @@
 
+void	count_sort(t_node **a, t_node **b, int exp)
+{
+	t_node *ptr = *a;
+	int i, count[10] = { 0 };
+
+	while (ptr != NULL)
+	{
+		count[(ptr->data / exp) % 10]++;
+		ptr = ptr->next;
+	}
+	for (i = 0; i < 10; i++)
+		printf("%d  " , count[i]);
+	printf("\n");
+	for (i = 1; i < 10; i++)
+		count[i] += count[i - 1];
+	push(a, b, "pb\n");
+	while (*a != NULL)
+	{
+		int where = count[((*a)->data / exp) % 10 - 1];
+		if (where > stack_len(*b))
+		{
+			push(a, b, "pb\n");
+			rotate(b, "rrb\n");
+		}
+		else
+		{
+			for (int i = where ; i > 0 ; i--)
+				rotate(b, "rb\n");
+			push(a, b, "pb\n");
+			for (int i = where ; i > 0 ; i--)
+				rev_rotate(b, "rrb\n");
+		}
+		--count[where];
+		print_stacks(*a, *b);
+	}
+}
+
+
+
+15/11
+
+
+static int	max(t_node *head)
+{
+	int	max;
+	t_node	*ptr;
+
+	max = INT_MIN;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data > max)
+			max = ptr->data;
+		ptr = ptr->next;
+	}
+	return (max);
+}
+
+static int	get_first_digit(int num)
+{
+	int	n;
+	int	res;
+
+	n = num;
+	res = 1;
+	if (num < 0)
+	{
+		res = -1;
+		n = -num;
+	}
+	while (n > 10)
+		n /= 10;
+	res *= n;
+	return (res);
+}
+
+static int	get_node_index(t_node *head, int og_node_data)
+{
+	int	idx;
+	t_node	*ptr;
+
+	idx = 0;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data < og_node_data)
+			idx++;
+		ptr = ptr->next;
+	}
+	return (idx);
+}
+
+static t_node	*get_stack_indexes(t_node *head)
+{
+	t_node	*idxs;
+	t_node	*ptr;
+
+	idxs = NULL;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		add_node_back(&idxs, get_node_index(head, ptr->data));
+		ptr = ptr->next;
+	}
+	return (idxs);
+}
+
+static t_node *rev_lst(t_node *head)
+{
+	t_node	*new;
+	t_node	*ptr;
+
+	new = NULL;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		add_node_front(&new, ptr->data);
+		ptr = ptr->next;
+	}
+	return (new);
+}
+
+void	apply_op(t_node **a, int op_num, char *str)
+{
+	int op;
+	void (*ops[2])(t_node **head, char *str);
+
+	op = 0;
+	ops[0] = rotate;
+	ops[1] = rev_rotate;
+	if (ft_strcmp(str, "ra\n") != 0 && ft_strcmp(str, "rb\n") != 0)
+		op = 1;
+	while (op_num)
+	{
+		ops[op](a, str);
+		op_num--;
+	}
+}
+
+void	push_next_node(t_node *idxs, t_node **a, t_node **b, int stack_size, int i)
+{
+	int	left_min;
+	int	right_min;
+	t_node	*rev_idxs;
+	t_node	*ptr;
+
+	left_min = 0;
+	right_min = 0;
+	ptr = idxs;
+	rev_idxs = rev_lst(idxs);
+	while (ptr != NULL)
+	{
+		if (ptr->data < stack_size / 11 - i)
+			break ;
+		left_min++;
+		ptr = ptr->next;
+	}
+	ptr = rev_idxs;
+	while (ptr != NULL)
+	{
+		if (ptr->data < stack_size / 11 - i)
+			break ;
+		right_min++;
+		ptr = ptr->next;
+	}
+	ft_memdel_stack(rev_idxs);
+	if (left_min < right_min)
+	{
+		if (left_min > 0)
+			apply_op(a, left_min, "ra\n");
+	}
+	else
+		apply_op(a, right_min + 1, "rra\n");
+	push(a, b, "pb\n");
+}
+
+void	sort_big_stack(t_node **a, t_node **b)
+{
+	int	stack_size = stack_len(*a);
+	t_node *idxs;
+	int i = 0;
+	int y = 0;
+
+	while (y < 11)
+	{
+		idxs = get_stack_indexes(*a);
+		i = 0;
+		while (i < stack_size / 11)
+		{
+			push_next_node(idxs, a, b, stack_size, i);
+			ft_memdel_stack(idxs);
+			idxs = get_stack_indexes(*a);
+			i++;
+		}
+		ft_memdel_stack(idxs);
+		y++;
+	}
+	while (stack_len(*b))
+	{
+		int bmax = max(*b);
+		int s = get_node_index(*b, bmax);
+		while ((*b)->data != bmax)
+		{
+			if (s < stack_len(*b) / 2)
+				rotate(b, "rb\n");
+			else
+				rev_rotate(b, "rrb\n");
+		}
+		push(b, a, "pa\n");
+	}
+}
+
+
+
+
+/* void	partition(t_node **a, t_node **b, int pivot) */
+/* { */
+/* 	char	*ins = ft_strdup(""); */
+/* 	t_node *ptr = (*a); */
+
+/* 	while (ptr != NULL && max(ptr) > pivot) */
+/* 	{ */
+/* 		if (ptr->data > pivot) */
+/* 			ins = ft_add_char(ins, 'p'); */
+/* 		else */
+/* 			ins = ft_add_char(ins, 'r'); */
+/* 		ptr = ptr->next; */
+/* 	} */
+/* 	for (int i = 0 ; ins[i] ; i++) */
+/* 	{ */
+/* 		if (ins[i] == 'p') */
+/* 			push(a, b, "pb\n"); */
+/* 		else if (ins[i] == 'r') */
+/* 			rotate(a, "ra\n"); */
+/* 	} */
+/* 	ft_memdel(ins); */
+/* } */
+
+/* int	avg(t_node *a) */
+/* { */
+/* 	t_node *ptr; */
+/* 	int sum; */
+
+/* 	sum = 0; */
+/* 	ptr = a; */
+/* 	while (ptr != NULL) */
+/* 	{ */
+/* 		sum += ptr->data; */
+/* 		ptr = ptr->next; */
+/* 	} */
+/* 	return (sum / stack_len(a)); */
+/* } */
+
+/* void	sort_big_stack(t_node **a, t_node **b) */
+/* { */
+/* 	long	med_data; */
+/* 	int	min; */
+
+/* 	min = INT_MIN; */
+/* 	while (stack_len(*a) > 5) */
+/* 	{ */
+/* 		med_data = avg(*a); */
+/* 		partition(a, b, med_data); */
+/* 	} */
+/* 	if (stack_is_sorted(*a) == false) */
+/* 		sort_small_stack(a, b, stack_len(*a)); */
+/* 	while (*b) */
+/* 	{ */
+/* 		min = get_next_min(*b, min); */
+/* 		while ((*b)->data != min) */
+/* 		{ */
+/* 			if (node_id(*b, min) <= stack_len(*b) / 2) */
+/* 				rotate(b, "rb\n"); */
+/* 			else */
+/* 				rev_rotate(b, "rrb\n"); */
+/* 		} */
+/* 		push(b, a, "pa\n"); */
+/* 		rotate(a, "ra\n"); */
+/* 	} */
+/* } */
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------
+
 static int	max(t_node *head)
 {
 	int	max;
