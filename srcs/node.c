@@ -77,7 +77,7 @@ bool	add_node_front(t_node **head, int data)
 /*
 ** Returns the index where the node containing node_data belongs.
 */
-int	node_index(t_node *head, int node_data)
+int	get_node_insertion_id(t_node *head, int node_data)
 {
 	int		i;
 	t_node	*ptr;

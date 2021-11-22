@@ -64,7 +64,7 @@ static void	sort_4_5(t_node **a, t_node **b, int stack_size)
 		sort_small_stack(a, b, stack_len(*a));
 	while (stack_len(*a) < stack_size)
 	{
-		index = node_index(*a, (*b)->data);
+		index = get_node_insertion_id(*a, (*b)->data);
 		if (index <= 2)
 			insert_first_half(a, b, index);
 		else

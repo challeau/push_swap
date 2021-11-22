@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <assert.h>
 
+
+#include <math.h>
+
 typedef struct s_node{
 	int			data;
 	int			index;
@@ -25,7 +28,7 @@ bool	add_node_after(t_node **prev_node, int data);
 bool	add_node_back(t_node **head, int data);
 bool	add_node_front(t_node **head, int data);
 int	pop(t_node **head);
-int	node_index(t_node *head, int node_data);
+int	get_node_insertion_id(t_node *head, int node_data);
 
 /* STACKS */
 void	ft_memdel_stack(t_node *head);
@@ -48,6 +51,6 @@ t_node	*get_stack(char **args);
 void	error(t_node *head);
 void	find_data_limits(t_node *head, long *min, long *max);
 int	get_next_min(t_node *head, int prev_min);
-int	node_id(t_node *head, int node_data);
+int	get_node_id(t_node *head, int node_data);
 
 #endif

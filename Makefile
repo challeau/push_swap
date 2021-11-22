@@ -10,7 +10,7 @@ CC		=	clang
 CCFLAGS		=	-Wall -Werror -Wextra -g
 CPPFLAGS	=	-I $(INC)
 LDFLAGS		=	-L./lib
-LDLIBS		=	-lft
+LDLIBS		=	-lft -lm
 INC		=	./inc/libft
 
 all:

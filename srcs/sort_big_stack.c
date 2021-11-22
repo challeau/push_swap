@@ -17,6 +17,21 @@
 /* 	return (num / exp % 10); */
 /* } */
 
+long	avg(t_node *a)
+{
+	t_node *ptr;
+	long sum;
+
+	sum = 0;
+	ptr = a;
+	while (ptr != NULL)
+	{
+		sum += ptr->data;
+		ptr = ptr->next;
+	}
+	return (sum / stack_len(a));
+}
+
 static int	get_max(t_node *head)
 {
 	int	max;
@@ -49,6 +64,21 @@ static int	get_min(t_node *head)
 	return (min);
 }
 
+/* static t_node *rev_lst(t_node *head) */
+/* { */
+/* 	t_node	*new; */
+/* 	t_node	*ptr; */
+
+/* 	new = NULL; */
+/* 	ptr = head; */
+/* 	while (ptr != NULL) */
+/* 	{ */
+/* 		add_node_front(&new, ptr->data); */
+/* 		ptr = ptr->next; */
+/* 	} */
+/* 	return (new); */
+/* } */
+
 /* void	apply_op(t_node **a, int op_num, char *str) */
 /* { */
 /* 	int op; */
@@ -64,88 +94,6 @@ static int	get_min(t_node *head)
 /* 		ops[op](a, str); */
 /* 		op_num--; */
 /* 	} */
-/* } */
-
-/* void	push_next_node(t_node **a, t_node **b, int exp) */
-/* { */
-/* 	t_node	*ptr; */
-/* 	int dig, buff = 0; */
-
-/* 	ptr = *b; */
-/* 	dig = get_significant_digit((*a)->data, exp); */
-/* 	/\* while ((dig > get_significant_digit((*a)->data, exp) || *\/ */
-/* 	/\* 	(dig == get_significant_digit((*a)->data, exp) *\/ */
-/* 	/\* 	 && get_significant_digit((*b)->data, exp / 10) > get_significant_digit((*a)->data, exp / 10))) *\/ */
-/* 	/\*        && ptr != NULL) *\/ */
-/* 	while (dig > get_significant_digit((*a)->data, exp) */
-/* 	       && ptr != NULL)	 */
-/* 	{ */
-/* 		buff++; */
-/* 		ptr = ptr->next; */
-/* 	} */
-/* 	if (buff < stack_len(*b) / 2) */
-/* 	{ */
-/* 		apply_op(b, buff, "ra\n"); */
-/* 		push(a, b, "pb\n"); */
-/* 		apply_op(b, buff, "rra\n"); */
-/* 	} */
-/* 	else */
-/* 	{ */
-/* 		apply_op(b, stack_len(*b) - buff, "rra\n"); */
-/* 		push(a, b, "pb\n"); */
-/* 		apply_op(b, stack_len(*b) - buff, "ra\n"); */
-/* 	} */
-/* } */
-
-/* void	count_sort(t_node **a, t_node **b, int exp) */
-/* { */
-/* 	int dig, buff = 0; */
-/* 	push(a, b, "pb\n"); */
-/* 	while (*a != NULL) */
-/* 		push_next_node(a, b, exp); */
-/* 	push(b, a, "pa\n"); */
-/* 	while (*b != NULL) */
-/* 	{ */
-/* 		dig = get_significant_digit((*b)->data, exp); */
-/* 		buff = 0; */
-/* 		while ((dig > get_significant_digit((*a)->data, exp) || */
-/* 		       (dig == get_significant_digit((*a)->data, exp) */
-/* 			&& get_significant_digit((*b)->data, exp / 10) > get_significant_digit((*a)->data, exp / 10))) */
-/* 		       && buff < stack_len(*a)) */
-/* 		{ */
-/* 			rotate(a, "ra\n"); */
-/* 			buff++; */
-/* 		} */
-/* 		push(b, a, "pa\n"); */
-/* 		while (buff > 0) */
-/* 		{ */
-/* 			rev_rotate(a, "rra\n"); */
-/* 			buff--; */
-/* 		} */
-/* 	} */
-	
-/* } */
-
-/* void	sort_big_stack(t_node **a, t_node **b) */
-/* { */
-/* 	int max = get_max(*a); */
-/* 	int exp = 1; */
-/* //	int turn = 1; */
-
-/* 	while (max / exp > 9) */
-/* 		exp *= 10; */
-/* 	count_sort(a, b, exp); */
-/* //	print_stacks(*a, *b); */
-/* 	/\* while (exp && stack_is_sorted(*a) == false) *\/ */
-/* 	/\* { *\/ */
-/* 	/\* 	printf("%d\n", exp); *\/ */
-/* 	/\* 	if (turn % 2 != 0) *\/ */
-/* 	/\* 		count_sort(a, b, exp); *\/ */
-/* 	/\* 	else *\/ */
-/* 	/\* 		count_sort(b, a, exp); *\/ */
-/* 	/\* 	exp /= 10;  *\/ */
-/* 	/\* 	turn++; *\/ */
-/* 	/\* } *\/ */
 /* } */
 
 void	partition(t_node **a, t_node **b, int pivot)
@@ -171,60 +119,143 @@ void	partition(t_node **a, t_node **b, int pivot)
 	ft_memdel(ins);
 }
 
-int	avg(t_node *a)
+void	move_node(t_node **from, t_node **to, int node_data)
 {
-	t_node *ptr;
-	int sum;
+	int	node_id;
+	int	node_insertion_id;
 
-	sum = 0;
-	ptr = a;
-	while (ptr != NULL)
+	node_id = get_node_id(*from, node_data);
+	node_insertion_id = get_node_insertion_id(*to, node_data);
+//	printf("data:%d, id a:%d, id b:%d\n", node_data, node_id, node_insertion_id);
+//	print_stacks(*from, *to);
+	while ((*from)->data != node_data)
 	{
-		sum += ptr->data;
-		ptr = ptr->next;
+		if (node_id <= stack_len(*from) / 2)
+			rotate(from, "ra\n");		// WRONG TEXT
+		else
+			rev_rotate(from, "rra\n");
 	}
-	return (sum / stack_len(a));
+//	print_stacks(*from, *to);
+//	printf("stack_len: %d   vs   ins_id: %d\n", stack_len(*to), node_insertion_id);
+	if (node_insertion_id == stack_len(*to))
+	{
+		push(from, to, "pb\n");
+		rotate(to, "rb\n");
+	}
+	else
+	{
+		int rot_num = 0;
+		if (node_insertion_id <= stack_len(*to) / 2)
+			rot_num = node_insertion_id;
+		else
+			rot_num = stack_len(*to) - node_insertion_id;
+		while (rot_num > 0)
+		{
+			if (node_insertion_id <= stack_len(*to) / 2)
+				rotate(to, "ra\n");		// WRONG TEXT
+			else
+				rev_rotate(to, "rra\n");
+			rot_num--;
+		}
+		push(from, to, "pb\n");
+	}
+//	print_stacks(*from, *to);
 }
 
-//void	move_node()
+int	get_next_node(t_node *head)
+{
+	int	min = get_min(head);
+	int	max = get_max(head);
+
+	int num_ops_min;
+	int num_ops_max;
+
+	num_ops_min = get_node_id(head, min) < stack_len(head) / 2 ? get_node_id(head, min) : stack_len(head) - get_node_id(head, min);
+	num_ops_max = get_node_id(head, max) < stack_len(head) / 2 ? get_node_id(head, max) : stack_len(head) - get_node_id(head, max);
+	if (num_ops_min < num_ops_max)
+		return (min);
+	return (max);
+}
+
+void	stack_pointer_to_min(t_node **a)
+{
+	int	min = get_min(*a);
+
+	if (get_node_id(*a, min) < stack_len(*a) / 2)
+	{
+		while ((*a)->data != min)
+			rotate(a, "ra\n");
+	}
+	else
+	{
+		while ((*a)->data != min)
+			rev_rotate(a, "rra\n");
+	}
+}
+
+long	unbiased_avg(t_node **a)
+{
+	float dev, mean, var, sumsqr = 0, std_dev;
+	t_node *ptr = *a;
+	t_node *unbiased_stack = NULL;
+
+	mean = avg(*a);
+	while (ptr)
+	{
+		dev = ptr->data - mean;
+		sumsqr += dev * dev;
+		ptr = ptr->next;
+	}
+	var = sumsqr / stack_len(*a);
+	std_dev = sqrt(var);
+	ptr = *a;
+	while (ptr)
+	{
+		if (ptr->data < std_dev && ptr->data > std_dev * -1)
+			add_node_back(&unbiased_stack, ptr->data);
+		ptr = ptr->next;
+	}
+	if (unbiased_stack == NULL || std_dev / mean < 1)
+		return (mean);
+	long res = avg(unbiased_stack);
+	ft_memdel_stack(unbiased_stack);
+	return (res);
+}
 
 void	sort_big_stack(t_node **a, t_node **b)
 {
 	long	med_data;
-	int	min, max;
-
+	int	min, max, next;
+	
 	min = get_min(*a);
 	max = get_max(*a);
-	/* move_node(a, b, min); */
-	/* move_node(a, b, max); */
+	move_node(a, b, min);
+	move_node(a, b, max);
 	while (stack_len(*a) > 5)
 	{
-		med_data = avg(*a);
+		med_data = unbiased_avg(a);
 //		printf("%ld -> max=%d, min=%d\n", med_data, get_max(*a), get_min(*a));
 		partition(a, b, med_data);
 	}
 	if (stack_is_sorted(*a) == false)
 		sort_small_stack(a, b, stack_len(*a));
 //	print_stacks(*a, *b);
+	move_node(b, a, get_max(*b));
+	move_node(b, a, get_min(*b));
+//	print_stacks(*a, *b);
 	while (*b)
 	{
-		/* if ((*b)->data > get_max(*a)) */
-		/* { */
-		/* 	push(b, a, "pa\n"); */
-		/* 	rotate(a, "ra\n"); */
-		/* } */
-		/* if ((*b)->data < (*a)->data) */
-		/* 	push(b, a, "pa\n"); */
-		min = get_next_min(*b, min);
-		while ((*b)->data != min)
+//		print_stacks(*a, *b);
+		next = get_next_node(*b);
+		while ((*b)->data != next)
 		{
-			if (node_id(*b, min) <= stack_len(*b) / 2)
+			if (get_node_id(*b, next) <= stack_len(*b) / 2)
 				rotate(b, "rb\n");
 			else
 				rev_rotate(b, "rrb\n");
 		}
-		push(b, a, "pa\n");
-		rotate(a, "ra\n");
+		move_node(b, a, (*b)->data);
 	}
+	stack_pointer_to_min(a);
 }
 

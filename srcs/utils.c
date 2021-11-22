@@ -65,7 +65,7 @@ int	get_next_min(t_node *head, int prev_min)
 /*
 ** Returns the index of the node that holds node_data in the stack.
 */
-int	node_id(t_node *head, int node_data)
+int	get_node_id(t_node *head, int node_data)
 {
 	int		index;
 	t_node	*ptr;
