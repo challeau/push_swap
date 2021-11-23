@@ -33,12 +33,12 @@ class colors:
     ENDC = '\033[0m'
 
 
-def test_100_stacks(stack: list, test_name: str):
+def test_100_stacks(stacks: list, test_name: str):
     op_nb = []
     error_flg = False
     print(colors.BOLD + '\nPerforming '
           + test_name + ' test.' + colors.ENDC)
-    for i in stack:
+    for i in stacks:
         proc = subprocess.Popen(['./push_swap', i],
                                 stdout=subprocess.PIPE,
                                 universal_newlines=True,
@@ -56,7 +56,7 @@ def test_100_stacks(stack: list, test_name: str):
     if (error_flg is False):
         print(colors.GREEN + '\t>>> Checker returned OK for all tests.'
               + colors.ENDC)
-    for i in stack:
+    for i in stacks:
         line_count = 0
         proc = subprocess.run(['./push_swap', i],
                               capture_output=True,
@@ -125,10 +125,12 @@ def main():
           + '###############################'
           + colors.ENDC)
 
-    test_small_stacks(perm.perm_3, '3')
-    test_small_stacks(perm.perm_4, '4')
-    test_small_stacks(perm.perm_5, '5')
-    test_100_stacks(perm.s100_hard, '100')
+    # test_small_stacks(perm.perm_3, '3')
+    # test_small_stacks(perm.perm_4, '4')
+    # test_small_stacks(perm.perm_5, '5')
+    test_100_stacks(perm.s100_ez, '100 easy')
+    test_100_stacks(perm.s100_hard, '100 hard')
+    test_100_stacks(perm.s500, '500')
 
 
 if __name__ == '__main__':

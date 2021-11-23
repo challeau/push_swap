@@ -7,16 +7,17 @@
 #include "libft/libft.h"
 
 #include <stdio.h>
-#include <assert.h>
-
-
-#include <math.h>
 
 typedef struct s_node{
 	int			data;
 	int			index;
 	struct s_node	*next;
 }		t_node;
+
+enum	e_stack_id{
+	e_STACK_A = 0,
+	e_STACK_B
+};
 
 /* SORTING */
 void	sort_small_stack(t_node **a, t_node **b, int stack_size);
