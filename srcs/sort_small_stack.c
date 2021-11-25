@@ -12,6 +12,10 @@
 
 #include "../inc/push_swap.h"
 
+/*
+** Pushes the first node of stack b to stack a, according to the index
+** if the index is less than 3.
+*/
 static void	insert_first_half(t_node **a, t_node **b, int index)
 {
 	if (index == 0)
@@ -30,6 +34,10 @@ static void	insert_first_half(t_node **a, t_node **b, int index)
 	}
 }
 
+/*
+** Pushes the first node of stack b to stack a, according to the index
+** if the index is greater than 2.
+*/
 static void	insert_second_half(t_node **a, t_node **b, int index)
 {
 	if (index == 3 && stack_len(*a) != 3)

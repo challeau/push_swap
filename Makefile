@@ -41,6 +41,7 @@ git-ready:
 	make -C $(INC) git-ready
 	rm -rf $(OBJS) $(OBJS_DIR) $(EXE)
 	rm -f $(wildcard *~) $(wildcard */*~)
+	rm -rf others/__pycache__ others/push_swap
 	echo "\033[1mReady to push.\033[m"
 
 re: fclean all

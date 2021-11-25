@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	int		stack_size;
 
 	if (ac > 1 && *av[1] == '\0')
-		error(NULL);
+		error(NULL, NULL);
 	a = get_stack(av + 1);
 	b = NULL;
 	stack_size = stack_len(a);

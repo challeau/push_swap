@@ -13,7 +13,25 @@
 #include "../inc/push_swap.h"
 
 /*
-** Frees a stack.
+** Returns the ammount of nodes in the stack.
+*/
+int	stack_len(t_node *head)
+{
+	int		len;
+	t_node	*ptr;
+
+	len = 0;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		len++;
+		ptr = ptr->next;
+	}
+	return (len);
+}
+
+/*
+** Frees the stack.
 */
 void	ft_memdel_stack(t_node *head)
 {
@@ -26,35 +44,6 @@ void	ft_memdel_stack(t_node *head)
 		free(ptr);
 		ptr = NULL;
 	}
-}
-
-int	peek(t_node *head)
-{
-	if (head == NULL)
-		return (INT_MIN);
-	return (head->data);
-}
-
-/*
-** Outputs the content of the stack to stdout.
-*/
-void	print_stacks(t_node *a, t_node *b)
-{
-	ft_putstr_fd("---------------------------------\n", 1);
-	while (a != NULL)
-	{
-		ft_putnbr_fd(a->data, 1);
-		ft_putstr_fd("  ", 1);
-		a = a->next;
-	}
-	ft_putstr_fd("\n", 1);
-	while (b != NULL)
-	{
-		ft_putnbr_fd(b->data, 1);
-		ft_putstr_fd("  ", 1);
-		b = b->next;
-	}
-	ft_putstr_fd("\n---------------------------------\n", 1);
 }
 
 /*
@@ -78,39 +67,44 @@ bool	stack_is_sorted(t_node *head)
 }
 
 /*
-** Returns true if the stack is sorted, false if it isnt.
+** Manipulates the stack pointed by a until the first node holds
+** the smallest data.
 */
-bool	stack_is_revsorted(t_node *head)
+void	stack_pointer_to_min(t_node **a)
 {
-	int		tmp;
-	t_node	*ptr;
+	int	min;
 
-	tmp = INT_MIN;
-	ptr = head;
-	while (ptr != NULL)
+	min = stack_min(*a);
+	if (get_node_id(*a, min) < stack_len(*a) / 2)
 	{
-		if (ptr->data < tmp)
-			return (false);
-		tmp = ptr->data;
-		ptr = ptr->next;
+		while ((*a)->data != min)
+			rotate(a, e_STACK_A);
 	}
-	return (true);
+	else
+	{
+		while ((*a)->data != min)
+			rev_rotate(a, e_STACK_A);
+	}
 }
 
 /*
-** Returns the ammount of nodes in the stack.
+** Outputs the content of the stack to stdout.
 */
-int	stack_len(t_node *head)
+void	print_stacks(t_node *a, t_node *b)
 {
-	int		len;
-	t_node	*ptr;
-
-	len = 0;
-	ptr = head;
-	while (ptr != NULL)
+	ft_putstr_fd("---------------------------------\n", 1);
+	while (a != NULL)
 	{
-		len++;
-		ptr = ptr->next;
+		ft_putnbr_fd(a->data, 1);
+		ft_putstr_fd("  ", 1);
+		a = a->next;
 	}
-	return (len);
+	ft_putstr_fd("\n", 1);
+	while (b != NULL)
+	{
+		ft_putnbr_fd(b->data, 1);
+		ft_putstr_fd("  ", 1);
+		b = b->next;
+	}
+	ft_putstr_fd("\n---------------------------------\n", 1);
 }

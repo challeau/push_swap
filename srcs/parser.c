@@ -46,8 +46,8 @@ static bool	check_and_add_arg(t_node **head, char *arg)
 		return (false);
 	if (ft_strlen(arg) >= 10)
 	{
-		if (*arg == '-' && ft_strlen(arg) == 11 &&
-		    ft_strcmp("-2147483648", arg) < 0)
+		if (*arg == '-' && ft_strlen(arg) == 11
+			&& ft_strcmp("-2147483648", arg) < 0)
 			return (false);
 		else if (ft_strcmp("2147483647", arg) < 0)
 			return (false);
@@ -82,11 +82,7 @@ t_node	*get_stack(char **args)
 	while (stack_data[i] != NULL)
 	{
 		if (check_and_add_arg(&new_stack, stack_data[i]) == false)
-		{
-			if (tmp_data != NULL)
-				ft_memdel_strptr(tmp_data);
-			error(new_stack);
-		}
+			error(new_stack, tmp_data);
 		i++;
 	}
 	if (tmp_data != NULL)

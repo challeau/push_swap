@@ -130,7 +130,7 @@ def main():
     # test_small_stacks(perm.perm_5, '5')
     test_100_stacks(perm.s100_ez, '100 easy')
     test_100_stacks(perm.s100_hard, '100 hard')
-    # test_100_stacks(perm.s500, '500')
+    test_100_stacks(perm.s500, '500')
 
 
 if __name__ == '__main__':

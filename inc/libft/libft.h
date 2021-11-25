@@ -28,7 +28,7 @@ char	*ft_realloc(char *str, size_t new_size);
 char	*ft_strdup(const char *src);
 char	**ft_strptrdup(char **src);
 
- /* STRING <=> NUM */
+/* STRING <=> NUM */
 float	ft_atof(const char*str);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int num);
@@ -54,7 +54,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
 void	ft_strrev(char *str);
-int	ft_strptrlen(char **src);
+int		ft_strptrlen(char **src);
 
 /* PRINTING */
 void	ft_putstr_fd(char *str, int fd);

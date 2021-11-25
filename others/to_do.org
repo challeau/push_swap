@@ -16,9 +16,10 @@
 |--------------------------+----------------------------------------------+--------+-----|
 | sort in ascending order: |                                              |        |     |
 | -small sort              |                                              | DONE   | y   |
-| -big sort                |                                              | MVP    | y   |
+| -big sort 100            |                                              | DONE   | y   |
+| -big sort 500            |                                              |        |     |
 |--------------------------+----------------------------------------------+--------+-----|
-| makefile + makefile lib  | message when doing nothing                   |        |     |
+| makefile + makefile lib  |                                              |        |     |
 |                          | no wildcards in makefile, gotta list all .cs |        |     |
 |                          | must display messages                        |        |     |
 |--------------------------+----------------------------------------------+--------+-----|
@@ -37,16 +38,16 @@
 |                                                           | rem. main |        |     |
 |                                                           | check     |        |     |
 |-----------------------------------------------------------+-----------+--------+-----|
-| program named push_swap receives as an argument the stack |           |        |     |
+| program named push_swap receives as an argument the stack |           | OK     | Y   |
 | a formatted as a list of integers                         |           |        |     |
 |-----------------------------------------------------------+-----------+--------+-----|
-| displays the smallest list of instructions possible to    |           |        |     |
+| displays the smallest list of instructions possible to    |           | OK     | Y   |
 | sort a, the smallest number being at the top.             |           |        |     |
 |-----------------------------------------------------------+-----------+--------+-----|
-| instructions must be separaed by a ’\n’ and nothing else  |           |        |     |
+| instructions must be separaed by a ’\n’ and nothing else  |           | OK     | Y   |
 |-----------------------------------------------------------+-----------+--------+-----|
-| sort the stack with the minimum possible number of ops    |           |        |     |
+| sort the stack with the minimum possible number of ops    |           | OK     | Y   |
 |-----------------------------------------------------------+-----------+--------+-----|
-| in case of error, you must display "Error\n"              |           |        |     |
+| in case of error, you must display "Error\n"              |           | OK     | Y   |
 |-----------------------------------------------------------+-----------+--------+-----|
 |                                                           |           |        |     |

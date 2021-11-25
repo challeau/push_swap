@@ -13,25 +13,6 @@
 #include "../inc/push_swap.h"
 
 /*
-** Creates a new node containing data and inserts it after the node prev_node.
-** Returns true upon success.
-*/
-bool	add_node_after(t_node **prev_node, int data)
-{
-	t_node	*new_node;
-
-	if (*prev_node == NULL)
-		return (false);
-	new_node = (t_node *)malloc(sizeof(t_node));
-	if (!new_node)
-		return (false);
-	new_node->data = data;
-	new_node->next = (*prev_node)->next;
-	(*prev_node)->next = new_node;
-	return (true);
-}
-
-/*
 ** Creates a new node containing the data and inserts it at the end of the stack.
 ** Returns true upon success.
 */
@@ -75,6 +56,45 @@ bool	add_node_front(t_node **head, int data)
 }
 
 /*
+** Creates a new node containing data and inserts it after the node prev_node.
+** Returns true upon success.
+*/
+bool	add_node_after(t_node **prev_node, int data)
+{
+	t_node	*new_node;
+
+	if (*prev_node == NULL)
+		return (false);
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		return (false);
+	new_node->data = data;
+	new_node->next = (*prev_node)->next;
+	(*prev_node)->next = new_node;
+	return (true);
+}
+
+/*
+** Returns the index of the node that holds node_data in the stack.
+*/
+int	get_node_id(t_node *head, int node_data)
+{
+	int		index;
+	t_node	*ptr;
+
+	index = 0;
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if (ptr->data == node_data)
+			return (index);
+		index++;
+		ptr = ptr->next;
+	}
+	return (index);
+}
+
+/*
 ** Returns the index where the node containing node_data belongs.
 */
 int	get_node_insertion_id(t_node *head, int node_data)
@@ -92,21 +112,4 @@ int	get_node_insertion_id(t_node *head, int node_data)
 		ptr = ptr->next;
 	}
 	return (i);
-}
-
-/*
-** Frees a node and return its data.
-*/
-int	pop(t_node **head)
-{
-	int		res;
-	t_node	*ptr;
-
-	if (*head == NULL)
-		return (0);
-	ptr = (*head);
-	res = ptr->data;
-	(*head) = ptr->next;
-	free(ptr);
-	return (res);
 }
