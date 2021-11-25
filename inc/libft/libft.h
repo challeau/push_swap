@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <unistd.h>
 
 /* MEMORY */
@@ -62,6 +63,7 @@ void	ft_putchar_fd(char c, int fd);
 
 /* INT STUFF */
 int		ft_intlen(long n);
+int		ft_sqrt(int num);
 
 /* OTHERS */
 int		get_next_line(int fd, char **line);

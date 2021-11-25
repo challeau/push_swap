@@ -40,18 +40,24 @@ bool	stack_is_revsorted(t_node *head);
 int	stack_len(t_node *head);
 
 /* INSTRUCTIONS */
-void	push(t_node **src, t_node **dest, char *str);
-void	rev_rotate(t_node **head, char *str);
-void	rotate(t_node **head, char *str);
-void	swap(t_node **head, char *str);
+void	push(t_node **src, t_node **dst, enum e_stack_id dst_id);
+void	rev_rotate(t_node **head, enum e_stack_id stack_id);
+void	rotate(t_node **head, enum e_stack_id stack_id);
+void	swap(t_node **head, enum e_stack_id stack_id);
 
 /* PARSER */
 t_node	*get_stack(char **args);
 
 /* UTILS */
 void	error(t_node *head);
-void	find_data_limits(t_node *head, long *min, long *max);
+void	stack_pointer_to_min(t_node **a);
 int	get_next_min(t_node *head, int prev_min);
 int	get_node_id(t_node *head, int node_data);
+
+/* MATHS */
+long	stack_avg(t_node *head);
+int	stack_max(t_node *head);
+int	stack_min(t_node *head);
+int	unbiased_stack_avg(t_node **head);
 
 #endif

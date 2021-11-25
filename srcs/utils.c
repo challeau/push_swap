@@ -23,23 +23,24 @@ void	error(t_node *head)
 	exit(EXIT_FAILURE);
 }
 
-/*
-** Assigns the minimum and maximum values in the stack.
-*/
-void	find_data_limits(t_node *head, long *min, long *max)
-{
-	t_node	*ptr;
 
-	*min = INT_MAX;
-	*max = INT_MIN;
-	ptr = head;
-	while (ptr != NULL)
+/*
+** Manipulates the stack pointed by a until the first node holds the smallest data.
+*/
+void	stack_pointer_to_min(t_node **a)
+{
+	int	min;
+
+	min= stack_min(*a);
+	if (get_node_id(*a, min) < stack_len(*a) / 2)
 	{
-		if (ptr->data < *min)
-			*min = ptr->data;
-		if (ptr->data > *max)
-			*max = ptr->data;
-		ptr = ptr->next;
+		while ((*a)->data != min)
+			rotate(a, e_STACK_A);
+	}
+	else
+	{
+		while ((*a)->data != min)
+			rev_rotate(a, e_STACK_A);
 	}
 }
 

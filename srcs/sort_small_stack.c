@@ -15,18 +15,18 @@
 static void	insert_first_half(t_node **a, t_node **b, int index)
 {
 	if (index == 0)
-		push(b, a, "pa\n");
+		push(b, a, e_STACK_A);
 	else if (index == 1)
 	{
-		push(b, a, "pa\n");
-		swap(a, "sa\n");
+		push(b, a, e_STACK_A);
+		swap(a, e_STACK_A);
 	}
 	else if (index == 2)
 	{
-		rotate(a, "ra\n");
-		push(b, a, "pa\n");
-		swap(a, "sa\n");
-		rev_rotate(a, "rra\n");
+		rotate(a, e_STACK_A);
+		push(b, a, e_STACK_A);
+		swap(a, e_STACK_A);
+		rev_rotate(a, e_STACK_A);
 	}
 }
 
@@ -34,15 +34,15 @@ static void	insert_second_half(t_node **a, t_node **b, int index)
 {
 	if (index == 3 && stack_len(*a) != 3)
 	{
-		rev_rotate(a, "rra\n");
-		push(b, a, "pa\n");
-		rotate(a, "ra\n");
-		rotate(a, "ra\n");
+		rev_rotate(a, e_STACK_A);
+		push(b, a, e_STACK_A);
+		rotate(a, e_STACK_A);
+		rotate(a, e_STACK_A);
 	}
 	else if (index == stack_len(*a))
 	{
-		push(b, a, "pa\n");
-		rotate(a, "ra\n");
+		push(b, a, e_STACK_A);
+		rotate(a, e_STACK_A);
 	}
 }
 
@@ -57,7 +57,7 @@ static void	sort_4_5(t_node **a, t_node **b, int stack_size)
 	i = 0;
 	while (i < stack_size / 2)
 	{
-		push(a, b, "pb\n");
+		push(a, b, e_STACK_B);
 		i++;
 	}
 	if (stack_is_sorted(*a) == false)
@@ -84,20 +84,20 @@ void	sort_small_stack(t_node **a, t_node **b, int stack_size)
 	first = (*a)->data;
 	second = (*a)->next->data;
 	if (stack_size == 2 && first > second)
-		swap(a, "sa\n");
+		swap(a, e_STACK_A);
 	else if (stack_size == 3)
 	{
 		last = (*a)->next->next->data;
 		if (first < last || (first > second && second > last))
 		{
-			swap(a, "sa\n");
+			swap(a, e_STACK_A);
 			first = (*a)->data;
 			second = (*a)->next->data;
 		}
 		if (first > second)
-			rotate(a, "ra\n");
+			rotate(a, e_STACK_A);
 		if (second > last)
-			rev_rotate(a, "rra\n");
+			rev_rotate(a, e_STACK_A);
 	}
 	else
 		sort_4_5(a, b, stack_size);

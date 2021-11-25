@@ -16,15 +16,18 @@
 ** Pushes a node from stack src to stack dest.
 ** Outputs the operation.
 */
-void	push(t_node **src, t_node **dest, char *str)
+void	push(t_node **src, t_node **dst, enum e_stack_id dst_id)
 {
 	t_node	*new_node;
+	char	*message[2];
 
+	message[0] = "pa\n";
+	message[1] = "pb\n";
 	new_node = (*src);
 	if (*src == NULL)
 		return ;
 	(*src) = (*src)->next;
-	new_node->next = (*dest);
-	(*dest) = new_node;
-	ft_putstr_fd(str, 1);
+	new_node->next = (*dst);
+	(*dst) = new_node;
+	ft_putstr_fd(message[dst_id], 1);
 }
