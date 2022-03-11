@@ -39,11 +39,11 @@ def test_100_stacks(stacks: list, test_name: str):
     print(colors.BOLD + '\nPerforming '
           + test_name + ' test.' + colors.ENDC)
     for i in stacks:
-        proc = subprocess.Popen(['./push_swap', i],
+        proc = subprocess.Popen(['../push_swap', i],
                                 stdout=subprocess.PIPE,
                                 universal_newlines=True,
                                 text=True)
-        check = subprocess.Popen(['./checker_linux', i],
+        check = subprocess.Popen(['../checker_linux', i],
                                  stdin=proc.stdout,
                                  stdout=subprocess.PIPE,
                                  text=True)
@@ -58,7 +58,7 @@ def test_100_stacks(stacks: list, test_name: str):
               + colors.ENDC)
     for i in stacks:
         line_count = 0
-        proc = subprocess.run(['./push_swap', i],
+        proc = subprocess.run(['../push_swap', i],
                               capture_output=True,
                               text=True)
         for c in proc.stdout:
@@ -79,11 +79,11 @@ def test_small_stacks(perm: list, test_num: str):
     print(colors.BOLD + '\nTesting all permutations of '
           + test_num + ' numbers.' + colors.ENDC)
     for i in perm:
-        proc = subprocess.Popen(['./push_swap', i],
+        proc = subprocess.Popen(['../push_swap', i],
                                 stdout=subprocess.PIPE,
                                 universal_newlines=True,
                                 text=True)
-        check = subprocess.Popen(['./checker_linux', i],
+        check = subprocess.Popen(['../checker_linux', i],
                                  stdin=proc.stdout,
                                  stdout=subprocess.PIPE,
                                  text=True)
@@ -98,7 +98,7 @@ def test_small_stacks(perm: list, test_num: str):
               + colors.ENDC)
     for i in perm:
         line_count = 0
-        proc = subprocess.run(['./push_swap', i],
+        proc = subprocess.run(['../push_swap', i],
                               capture_output=True,
                               text=True)
         for c in proc.stdout:
@@ -125,12 +125,11 @@ def main():
           + '###############################'
           + colors.ENDC)
 
-    # test_small_stacks(perm.perm_3, '3')
-    # test_small_stacks(perm.perm_4, '4')
-    # test_small_stacks(perm.perm_5, '5')
+    test_small_stacks(perm.perm_3, '3')
+    test_small_stacks(perm.perm_4, '4')
+    test_small_stacks(perm.perm_5, '5')
     test_100_stacks(perm.s100_ez, '100 easy')
     test_100_stacks(perm.s100_hard, '100 hard')
-    test_100_stacks(perm.s500, '500')
 
 
 if __name__ == '__main__':
